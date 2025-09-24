@@ -3,7 +3,7 @@ module CrookedFunctions
 # Rewritten in Julia by Pierre Abbat
 # Public domain.
 using OffsetArrays
-export derivatives
+export derivatives,twist
 
 function derivatives(sbox::OffsetVector{<:Integer})
   sz=length(sbox)
@@ -16,6 +16,16 @@ function derivatives(sbox::OffsetVector{<:Integer})
     push!(derivativeCounts,length(der))
   end
   derivativeCounts
+end
+
+function twist(order::Integer)
+  sz=2^order
+  ret=OffsetVector(fill(0,sz),-1)
+  for i in eachindex(ret)
+    cnt=count_ones(i)
+    ret[i]=(i<<cnt|i>>(order-cnt))&(sz-1)
+  end
+  ret
 end
 
 end # module CrookedFunctions
