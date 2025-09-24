@@ -1,0 +1,10 @@
+name = "CrookedFunctions"
+uuid = "335fe7f5-1efd-45d2-9984-8ab936cfeaa1"
+authors = ["Pierre Abbat <phma@bezitopo.org>"]
+version = "0.1.0"
+
+[deps]
+OffsetArrays = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
+
+[compat]
+OffsetArrays = "1.17.0"
