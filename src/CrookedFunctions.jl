@@ -3,7 +3,7 @@ module CrookedFunctions
 # Rewritten in Julia by Pierre Abbat
 # Public domain.
 using OffsetArrays
-export derivatives,twist
+export derivatives,isPermutation,twist
 
 function derivatives(sbox::OffsetVector{<:Integer})
   sz=length(sbox)
@@ -16,6 +16,17 @@ function derivatives(sbox::OffsetVector{<:Integer})
     push!(derivativeCounts,length(der))
   end
   derivativeCounts
+end
+
+function isPermutation(sbox::OffsetVector{<:Integer})
+  # isperm expects numbers starting at 1
+  sorted=sort(sbox)
+  for i in eachindex(sorted)
+    if sorted[i]!=i
+      return false
+    end
+  end
+  return true
 end
 
 function twist(order::Integer)
