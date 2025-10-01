@@ -1,4 +1,4 @@
-module CrookedFunctions
+module CrookedTwistedFunctions
 # Rust code by Hitokiri Battosai aka Ferecides de Siros
 # Rewritten in Julia by Pierre Abbat
 # Public domain.
@@ -39,4 +39,4 @@ function twist(order::Integer)
   ret
 end
 
-end # module CrookedFunctions
+end # module CrookedTwistedFunctions
