@@ -1,6 +1,6 @@
 name = "CrookedTwistedFunctions"
 uuid = "335fe7f5-1efd-45d2-9984-8ab936cfeaa1"
-authors = ["Pierre Abbat <phma@bezitopo.org>"]
+authors = ["Pierre Abbat <phma@bezitopo.org>","Hitokiri Battosai <battosai@dnmx.cc>"]
 version = "0.1.0"
 
 [deps]
