@@ -3,7 +3,7 @@ module CrookedTwistedFunctions
 # Rewritten in Julia by Pierre Abbat
 # Public domain.
 using OffsetArrays
-export derivatives,isPermutation,twist
+export derivatives,isPermutation,apnScore,twist
 
 function derivatives(sbox::OffsetVector{<:Integer})
   sz=length(sbox)
@@ -27,6 +27,16 @@ function isPermutation(sbox::OffsetVector{<:Integer})
     end
   end
   return true
+end
+
+function apnScore(derivativeCounts::Vector{<:Integer})
+  expected=(length(derivativeCounts)+1)÷2
+  perfectMatches=count(x->x==expected,derivativeCounts)
+  perfectMatches/length(derivativeCounts)
+end
+
+function apnScore(sbox::OffsetVector{<:Integer})
+  apnScore(derivatives(sbox))
 end
 
 function twist(order::Integer)
