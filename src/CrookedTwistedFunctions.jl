@@ -2,8 +2,8 @@ module CrookedTwistedFunctions
 # Rust code by Hitokiri Battosai aka Ferecides de Siros
 # Rewritten in Julia by Pierre Abbat
 # Public domain.
-using OffsetArrays
-export derivatives,isPermutation,apnScore,twist
+using OffsetArrays,StatsBase
+export derivatives,isPermutation,apnScore,averages,twist
 
 """
     derivatives(sbox::OffsetVector{<:Integer})
@@ -53,13 +53,40 @@ function apnScore(derivativeCounts::Vector{<:Integer})
 end
 
 """
-    apnScore(derivativeCounts::Vector{<:Integer})
+    apnScore(sbox::OffsetVector{<:Integer})
 
 Compute the APN (almost perfectly nonlinear) score of an S-box, whose domain and
 range should be the same size.
 """
 function apnScore(sbox::OffsetVector{<:Integer})
   apnScore(derivatives(sbox))
+end
+
+"""
+    averages(derivativeCounts::Vector{<:Real})
+
+Compute the minimum, harmonic mean, geometric mean, arithmetic mean, and maximum
+of a vector of nonnegative real numbers.
+"""
+function averages(derivativeCounts::Vector{<:Real})
+  resType=promote_type(eltype(derivativeCounts),Float64)
+  dc=resType.(derivativeCounts)
+  [ minimum(dc)
+  , harmmean(dc)
+  , geomean(dc)
+  , mean(dc)
+  , maximum(dc)
+  ]
+end
+
+"""
+    averages(sbox::OffsetVector{<:Integer})
+
+Compute the averages of the derivative counts of an S-box, whose domain and
+range should be the same size.
+"""
+function averages(sbox::OffsetVector{<:Integer})
+  averages(derivatives(sbox))
 end
 
 """
