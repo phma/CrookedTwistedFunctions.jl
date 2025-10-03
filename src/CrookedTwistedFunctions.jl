@@ -2,7 +2,7 @@ module CrookedTwistedFunctions
 # Rust code by Hitokiri Battosai aka Ferecides de Siros
 # Rewritten in Julia by Pierre Abbat
 # Public domain.
-using OffsetArrays,StatsBase
+using OffsetArrays,StatsBase,CairoMakie
 export derivatives,isPermutation,apnScore,averages,twist
 
 """
