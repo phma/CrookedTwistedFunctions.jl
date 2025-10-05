@@ -106,4 +106,20 @@ function twist(order::Integer)
   ret
 end
 
+"""
+    twistRangeAverages(r::Vector{<:Integer})
+
+`r` is a (vertical) vector of integers, normally a range from 3 to a small number.
+Returns a matrix with 5 rows (what `averages` returns) and as many columns as
+`r` has rows, by computing the averages of derivative counts of each twisted
+function and dividing them by the maximum possible derivative count.
+"""
+function twistRangeAverages(r::Vector{<:Integer})
+  ret=fill(0.0,5,length(r))
+  for i in eachindex(r)
+    ret[:,i]=averages(twist(r[i]))./2^(r[i]-1)
+  end
+  ret
+end
+
 end # module CrookedTwistedFunctions
