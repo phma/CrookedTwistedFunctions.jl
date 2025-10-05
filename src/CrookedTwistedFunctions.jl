@@ -3,7 +3,7 @@ module CrookedTwistedFunctions
 # Rewritten in Julia by Pierre Abbat
 # Public domain.
 using OffsetArrays,StatsBase,CairoMakie
-export derivatives,isPermutation,apnScore,averages,twist
+export derivatives,isPermutation,apnScore,averages,twist,plotTwistRangeAverages
 
 """
     derivatives(sbox::OffsetVector{<:Integer})
@@ -121,5 +121,19 @@ function twistRangeAverages(r::Vector{<:Integer})
   end
   ret
 end
+
+function plotTwistRangeAverages(r::Vector{<:Integer})
+  tra=Figure(size=(1189,841))
+  traax=Axis(tra[1,1],
+    title="Nonlinearity of Twisted Functions")
+  series!(traax,r,twistRangeAverages(r),labels=["min","harm","geom","arith","max"])
+  axislegend(traax)
+  save("twisted-nonlinearity.svg",tra)
+end
+
+function plotTwistRangeAverages(r::OrdinalRange{<:Integer})
+  plotTwistRangeAverages(collect(r))
+end
+  
 
 end # module CrookedTwistedFunctions
