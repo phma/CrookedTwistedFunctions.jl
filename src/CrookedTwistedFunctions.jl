@@ -122,6 +122,14 @@ function twistRangeAverages(r::Vector{<:Integer})
   ret
 end
 
+"""
+    plotTwistRangeAverages(r::Vector{<:Integer})
+    plotTwistRangeAverages(r::OrdinalRange{<:Integer})
+
+Plot the nonlinearity of twisted functions of orders in the given range, as
+measured by the derivative counts relative to the maximum possible derivative
+count. Execution time grows exponentially with order. Output is in SVG.
+"""
 function plotTwistRangeAverages(r::Vector{<:Integer})
   tra=Figure(size=(1189,841))
   traax=Axis(tra[1,1],
@@ -134,6 +142,5 @@ end
 function plotTwistRangeAverages(r::OrdinalRange{<:Integer})
   plotTwistRangeAverages(collect(r))
 end
-  
 
 end # module CrookedTwistedFunctions
